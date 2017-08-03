@@ -37,6 +37,39 @@ See doc/COPYRIGHT.rdoc for more details.
 <% content_for :header_tags do %>
   <%= render :partial => 'shared/backlogs_header' %>
   <%= stylesheet_link_tag 'backlogs/taskboard.css' %>
+
+<style>
+@media screen and (min-width: 1350px) {
+.task > .id,
+.task > .subject,
+.task > .assigned_to_id {
+width: 190px !important;
+}
+
+.t > .avatar-mini {
+	width: 30px !important;
+}
+
+.task {
+width: 200px !important;
+border-radius: 5px;
+}
+
+.swimlane {
+width: 300px !important;
+}
+
+}
+
+.work_package .assigned_to_id.editable {
+margin-top: 0px !important;
+}
+
+.story {
+border-radius: 5px;
+}
+</style>
+
 <% end %>
 <% html_title @sprint.name %>
 <%= toolbar title: @sprint.name do %>
@@ -99,8 +132,8 @@ See doc/COPYRIGHT.rdoc for more details.
               <div class="subject"><%= story.subject %></div>
               <div class='story-footer'>
                 <div class="assigned_to_id">
-                  <% if story.assigned_to.present? %>
-                    <%= link_to_user(story.assigned_to) %>
+                 <% if story.assigned_to.present? %>
+                    <%= avatar(story.assigned_to, class: 'avatar-mini') + link_to_user(story.assigned_to) %>
                   <% else %>
                     <em><%= l('backlogs.unassigned') %></em>
                   <% end %>
